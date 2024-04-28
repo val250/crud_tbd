@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f3e5f5; /* Fondo lila claro */
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: #880e4f; /* Texto rosa oscuro */
+        text-align: center;
+    }
+
+    form {
+        width: 300px;
+        margin: 0 auto;
+        background-color: #ffffff; /* Fondo blanco */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Sombra */
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #880e4f; /* Texto rosa oscuro */
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: #fff5ee; /* Fondo rosa claro */
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="tel"]:focus {
+        background-color: #ffcdd2; /* Fondo rosa claro cuando está enfocado */
+    }
+
+    button {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ad1457; /* Botón rosa */
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #880e4f; /* Cambio de color al pasar el ratón */
+    }
+</style>
+</head>
+<body>
+    <h1>Registro</h1>
+    <form id="formulario">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre"required><br>
+        
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" required><br>
+        
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" required><br>
+        
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" required><br>
+        
+        <button type="submit">Guardar</button>
+    </form>
+
+    <script>
+        // Función para agregar un nuevo registro a la tabla
+        function agregarRegistro() {
+            var nombre = document.getElementById("nombre").value;
+            var apellido = document.getElementById("apellido").value;
+            var edad = document.getElementById("edad").value;
+            var telefono = document.getElementById("telefono").value;
+
+            // Crear un objeto para almacenar los datos
+            var datos = {
+                nombre: nombre,
+                apellido: apellido,
+                edad: edad,
+                telefono: telefono
+            };
+
+            // Convertir el objeto a una cadena JSON
+            var datosJSON = JSON.stringify(datos);
+
+            // Guardar los datos en el almacenamiento local
+            localStorage.setItem("registro", datosJSON);
+
+            alert("¡Registro guardado correctamente!");
+            document.getElementById("formulario").reset(); // Limpiar el formulario después de guardar el registro
+        }
+
+        // Agregar evento submit al formulario
+        document.getElementById("formulario").addEventListener("submit", function(event){
+            event.preventDefault(); // Evitar que el formulario se envíe
+            agregarRegistro(); // Llamar a la función para agregar el registro
+        });
+    </script>
+</body>
+</html>
+

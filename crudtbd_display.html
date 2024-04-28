@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3e5f5; /* Fondo lila claro */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #880e4f; /* Texto rosa oscuro */
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #880e4f; /* Borde inferior rosa oscuro */
+        }
+
+        th {
+            background-color: #ad1457; /* Fondo rosa */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8bbd0; /* Fondo rosa claro para filas pares */
+        }
+    </style>
+</head>
+<body>
+    <h1>Datos Registrados</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="nombre"></td>
+                <td id="apellido"></td>
+                <td id="edad"></td>
+                <td id="telefono"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Obtener los datos del almacenamiento local
+        var datosJSON = localStorage.getItem("registro");
+        if (datosJSON) {
+            // Convertir la cadena JSON a un objeto
+            var datos = JSON.parse(datosJSON);
+
+            // Mostrar los datos en la tabla
+            document.getElementById("nombre").textContent = datos.nombre;
+            document.getElementById("apellido").textContent = datos.apellido;
+            document.getElementById("edad").textContent = datos.edad;
+            document.getElementById("telefono").textContent = datos.telefono;
+        } else {
+            alert("No hay datos registrados.");
+        }
+    </script>
+</body>
+</html>
