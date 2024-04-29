@@ -37,6 +37,20 @@
         tr:nth-child(even) {
             background-color: #f8bbd0; /* Fondo rosa claro para filas pares */
         }
+
+        .editarBtn, .eliminarBtn {
+            background-color: #ff5252; /* Fondo rojo */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .editarBtn:hover, .eliminarBtn:hover {
+            background-color: #c62828; /* Fondo rojo oscuro al pasar el ratón */
+        }
     </style>
 </head>
 <body>
@@ -49,6 +63,7 @@
                 <th>Apellido</th>
                 <th>Edad</th>
                 <th>Teléfono</th>
+                <th>Acciones</th> <!-- Columna para las acciones (Editar y Eliminar) -->
             </tr>
         </thead>
         <tbody>
@@ -57,6 +72,10 @@
                 <td id="apellido"></td>
                 <td id="edad"></td>
                 <td id="telefono"></td>
+                <td>
+                    <button class="editarBtn">Editar</button> <!-- Botón para editar el registro -->
+                    <button class="eliminarBtn">Eliminar</button> <!-- Botón para eliminar el registro -->
+                </td>
             </tr>
         </tbody>
     </table>
@@ -73,9 +92,25 @@
             document.getElementById("apellido").textContent = datos.apellido;
             document.getElementById("edad").textContent = datos.edad;
             document.getElementById("telefono").textContent = datos.telefono;
+
+            // Manejar la solicitud de edición
+            document.querySelector(".editarBtn").addEventListener("click", function() {
+                // Redireccionar a la página de edición
+                window.location.href = "editar_crud.html";
+            });
+
+            // Manejar la solicitud de eliminación
+            document.querySelector(".eliminarBtn").addEventListener("click", function() {
+                // Eliminar los datos del almacenamiento local
+                localStorage.removeItem("registro");
+                alert("Los datos han sido eliminados correctamente.");
+                window.location.reload(); // Recargar la página para actualizar la tabla
+            });
         } else {
             alert("No hay datos registrados.");
         }
     </script>
 </body>
 </html>
+
+

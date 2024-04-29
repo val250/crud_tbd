@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3e5f5; /* Fondo lila claro */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #880e4f; /* Texto rosa oscuro */
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: auto;
+            background-color: #ffffff; /* Fondo blanco */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #ad1457; /* Fondo rosa */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #880e4f; /* Fondo rosa oscuro al pasar el ratón */
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Datos</h1>
+    
+    <form id="editarForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+        
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" required>
+        
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" required>
+        
+        <input type="submit" value="Guardar Cambios">
+    </form>
+
+    <script>
+        // Obtener los datos del almacenamiento local
+        var datosJSON = localStorage.getItem("registro");
+        if (datosJSON) {
+            // Convertir la cadena JSON a un objeto
+            var datos = JSON.parse(datosJSON);
+
+            // Mostrar los datos en el formulario
+            document.getElementById("nombre").value = datos.nombre;
+            document.getElementById("apellido").value = datos.apellido;
+            document.getElementById("edad").value = datos.edad;
+            document.getElementById("telefono").value = datos.telefono;
+        } else {
+            alert("No hay datos registrados.");
+        }
+
+        // Manejar la solicitud de edición
+        document.getElementById("editarForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Obtener los datos del formulario
+            var nombre = document.getElementById("nombre").value;
+            var apellido = document.getElementById("apellido").value;
+            var edad = document.getElementById("edad").value;
+            var telefono = document.getElementById("telefono").value;
+
+            // Actualizar los datos en el almacenamiento local
+            var nuevosDatos = {
+                nombre: nombre,
+                apellido: apellido,
+                edad: edad,
+                telefono: telefono
+            };
+            localStorage.setItem("registro", JSON.stringify(nuevosDatos));
+
+            alert("Los datos han sido actualizados correctamente.");
+            window.location.href = "crudtbd_display.html"; // Redireccionar al archivo original de visualización de datos
+        });
+    </script>
+</body>
+</html>
